@@ -1,0 +1,32 @@
+.MovieContainer{
+    padding: 5px;
+    background: rgba(0,12,12);
+    min-width: 0;
+}
+.MoviePosterLink>img{
+    width: 100%;
+    height: 200px;
+}
+.MovieTitle{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}
+.MovieFavoriteBtnDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.MovieYearSpan{
+    color: rgba(255,255,255,.5);
+    font-size: 14px;
+}
+.MovieFavoriteBtnDiv>button{
+    padding: 3px;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+
+}

@@ -1,0 +1,24 @@
+.SearchbarContainer {
+    padding: 10px;
+}
+.SearchInputContainer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.SearchInputContainer>input{
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid grey;
+    margin-right: 10px;
+}
+.SearchInputContainer>button {
+    padding: 8px;
+    cursor: pointer;
+}
+.SearchResultContainer{
+    margin-top: 10px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 10px;
+}

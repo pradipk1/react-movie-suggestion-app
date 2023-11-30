@@ -1,0 +1,30 @@
+.NavbarContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #000;
+    padding: 20px;
+}
+.navbarLink{
+    text-decoration: none;
+    color: white;
+}
+.navbarLink:hover {
+    color: burlywood;
+}
+.NavbarProfileDiv>span {
+    color: green;
+    margin-right: 20px;
+    font-size: 20px;
+}
+.NavbarProfileDiv>button {
+    background: transparent;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+.NavbarProfileDiv>button:hover {
+    color: burlywood;
+}

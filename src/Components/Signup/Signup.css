@@ -1,0 +1,38 @@
+.signupContainer>div {
+    padding: 20px;
+    margin-top: 10px;
+    width: 300px;
+    box-shadow: 0 0 10px black;
+}
+.signupContainer{
+    display: flex;
+    justify-content: center;
+}
+.formInpDiv{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.formInpDiv>label {
+    margin-bottom: 5px;
+}
+.formInpDiv>input {
+    padding: 10px;
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+.formSubmitDiv>input{
+    width: 100%;
+    padding: 8px;
+    background-color: darkkhaki;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+.formSubmitDiv {
+    margin-top: 30px;
+}
+.formSubmitDiv>input:hover {
+    background-color: rgb(226, 218, 102);
+}

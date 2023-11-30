@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import './App.css'
+import AllRoutes from "./Components/AllRoutes/AllRoutes";
+import Navbar from "./Components/Navbar/Navbar";
+import myContext from './Components/Context/Context';
+
 
 function App() {
+  let user = JSON.parse(localStorage.getItem('user')) || {name:'', isLoggedIn:false}
+  localStorage.setItem('user', JSON.stringify(user));
+
+  const [userStatus, setUserStatus] = useState({
+    ...user
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <myContext.Provider value={{userStatus, setUserStatus}}>
+        <Navbar />
+        <AllRoutes />
+      </myContext.Provider>
+      
     </div>
   );
 }
