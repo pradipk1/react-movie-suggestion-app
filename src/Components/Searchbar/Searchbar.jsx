@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Searchbar.css'
 import Movie from '../Movie/Movie';
 
 function Searchbar() {
-  const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [error, setError] = useState(false);
+  const [sort, setSort] = useState('');
+  const [filterYear, setFilterYear] = useState('');
 
-  const handleSubmit = () => {
-    fetch(`https://www.omdbapi.com/?s=${searchValue}&type=movie&apikey=ecb448ff`)
+  const handleChange =(e) => {
+    fetch(`https://www.omdbapi.com/?s=${e.target.value}&type=movie&apikey=ecb448ff`)
     .then(res => res.json())
     .then((data) => {
       if(data.Response==='True') {
-        setSearchResult(data.Search);
         localStorage.setItem('searchResults', JSON.stringify(data.Search));
+        handleSort(sort, data.Search);
         
       } else {
         setError(true);
@@ -23,57 +24,115 @@ function Searchbar() {
     });
   }
 
-  const handleYearSort = (e) => {
-    let results = JSON.parse(localStorage.getItem('searchResults'));
-
-    if(e.target.value==='ascending') {
+  const handleSort = (initialValue='', arr=[]) => {
+    let results = arr;
+    if(initialValue==='ascending') {
       results.sort((a,b) => a.Year-b.Year);
-      setSearchResult(results);
+      handleFilter(filterYear, results);
 
-    } else if(e.target.value==='descending') {
+    } else if(initialValue==='descending') {
       results.sort((a,b) => {
         if(a.Year>b.Year) return -1;
         if(a.Year<b.Year) return 1;
         return 0;
       });
-      setSearchResult(results);
-
+      handleFilter(filterYear, results);
+      
     } else {
-      setSearchResult(results);
+      handleFilter(filterYear, results);
     }
   }
+
+  const handleFilterYear = (initialValue='') => {
+    setFilterYear(initialValue);
+    let results = JSON.parse(localStorage.getItem('searchResults'));
+    if(initialValue==='') {
+      if(sort==='ascending') {
+        results.sort((a,b) => a.Year-b.Year);
+        setSearchResult(results);
+  
+      } else if(sort==='descending') {
+        results.sort((a,b) => {
+          if(a.Year>b.Year) return -1;
+          if(a.Year<b.Year) return 1;
+          return 0;
+        });
+        setSearchResult(results);
+        
+      } else {
+        setSearchResult(results);
+      }
+
+    } else {
+      const filterArr = results.filter((ele) => ele.Year===initialValue);
+      handleSort(sort, filterArr);
+    }
+    
+  }
+
+  const handleFilter = (initialValue='', arr=[]) => {
+    if(initialValue==='') {
+      setSearchResult(arr)
+    } else {
+      const filterArr = arr.filter((ele) => ele.Year===initialValue);
+      setSearchResult(filterArr);
+    }
+  }
+
+  let endYear = new Date().getFullYear();
+  let yearArr = [];
+  for(let i=endYear; i>=1900; i--) {
+    yearArr.push(i);
+  }
+
+  useEffect(() => {
+    let results = JSON.parse(localStorage.getItem('searchResults')) || [];
+    setSearchResult(results);
+  },[])
 
   return (
     <div className='SearchbarContainer'>
 
+      <div className='SearchInputFilterContainer'>
         <div className='SearchInputContainer'>
-          <input type="text" placeholder='Enter Something'
-          onChange={(e) => {
-            setSearchValue(e.target.value)
-          }}
-          />
-          <button onClick={handleSubmit}>Submit</button>
+          <input type="text" placeholder='Enter Something!' onChange={handleChange}/>
         </div>
 
-        <div>
-          <select onChange={handleYearSort}>
+        <div className='SortFilterContainer'>
+          <select onChange={(e) =>{
+            setSort(e.target.value);
+            let res=JSON.parse(localStorage.getItem('searchResults'));
+            handleSort(e.target.value, res);
+          }} value={sort}>
             <option value="">Sort by Year</option>
             <option value="ascending">Ascending</option>
             <option value="descending">Descending</option>
           </select>
-        </div>
-        {
-          searchResult.length===0 ? 
-          (error ? <h2 style={{textAlign:'center', color:'red'}}>No data found</h2> : '')
-          : <div className='SearchResultContainer'>
+          
+          <select onChange={(e) => {
+            setFilterYear(e.target.value);
+            handleFilterYear(e.target.value);
+          }}>
+            <option value="">Filter by Year</option>
             {
-              searchResult.map((ele, ind) => (
-                <Movie ele={ele} key={'movie'+ind}/>
+              yearArr.map((ele,ind) => (
+                <option value={ele} key={'option'+ind}>{ele}</option>
               ))
             }
-          </div> 
-        }
-        
+          </select>
+        </div>
+      </div>
+      {
+        searchResult.length===0 ? 
+        (error ? <h2 style={{textAlign:'center', color:'red'}}>No data found</h2> : '')
+        : <div className='SearchResultContainer'>
+          {
+            searchResult.map((ele, ind) => (
+              <Movie ele={ele} key={'movie'+ind}/>
+            ))
+          }
+        </div> 
+      }
     </div>
   )
 }

@@ -1,8 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import './Favorites.css'
 
 function Favorites() {
+  
+  const[favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    let favoritesArr = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(favoritesArr);
+  },[]);
+
+  const removeFromFavorite = (ind) => {
+    console.log(ind);
+    let favoritesArr = JSON.parse(localStorage.getItem('favorites'));
+    favoritesArr.splice(ind,1);
+    localStorage.setItem('favorites', JSON.stringify(favoritesArr));
+    setFavorites(favoritesArr);
+  }
+
   return (
-    <div>Favorites</div>
+    
+        favorites.length===0 ? <h2 style={{textAlign:'center'}}>No favorites added</h2> : 
+        <div className='FavoritesContainer'>
+          {
+            favorites.map((ele,ind) => (
+              <div className='FavoritesCardContainer'>
+                <Link to={`/moviedetails/${ele.imdbID}`} className='FavoritesPosterLink'>
+                    <img src={ele.Poster} alt="" />
+                </Link>
+                <div className='FavoritesDetailsDiv'>
+                  <p className='FavoritesTitle'>{ele.Title}</p>
+                  <h4>{ele.Year}</h4>
+                  <button style={{cursor:'pointer'}} className='RemoveFromFavoritesBtn' onClick={() => removeFromFavorite(ind)}>Remove from Favorites</button>
+                </div>
+              </div>
+            ))
+          }
+        </div>
   )
 }
 

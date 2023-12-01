@@ -1,0 +1,63 @@
+.FavoritesContainer{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+}
+.FavoritesCardContainer{
+    display: flex;
+    padding: 5px;
+    background: rgb(0,12,12);
+    color: rgba(255,255,255,.5);
+    box-shadow: 0 0 10px black;
+    min-width: 0;
+}
+.FavoritesPosterLink{
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.FavoritesPosterLink>img{
+    width: 150px;
+    height: 150px;
+}
+.FavoritesDetailsDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.FavoritesTitle{
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.RemoveFromFavoritesBtn{
+    width: fit-content;
+}
+
+
+@media screen and (max-width: 1080px) {
+    .FavoritesContainer{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media screen and (max-width: 890px) {
+    .FavoritesContainer{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .FavoritesPosterLink{
+        display: block;
+    }
+    .FavoritesCardContainer{
+        display: block;
+    }
+    .FavoritesDetailsDiv{
+        display: block;
+    }
+}

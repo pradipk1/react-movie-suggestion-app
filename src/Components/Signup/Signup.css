@@ -36,3 +36,10 @@
 .formSubmitDiv>input:hover {
     background-color: rgb(226, 218, 102);
 }
+
+
+@media screen and (max-width: 370px) {
+    .signupContainer>div{
+        width: 100%;
+    }
+}

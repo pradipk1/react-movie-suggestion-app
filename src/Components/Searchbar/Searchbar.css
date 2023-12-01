@@ -1,9 +1,14 @@
 .SearchbarContainer {
-    padding: 10px;
+    padding: 5px;
+}
+.SearchInputFilterContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 .SearchInputContainer {
-    text-align: center;
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
 }
 .SearchInputContainer>input{
     padding: 10px;
@@ -11,9 +16,11 @@
     border: 1px solid grey;
     margin-right: 10px;
 }
-.SearchInputContainer>button {
-    padding: 8px;
-    cursor: pointer;
+.SortFilterContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
 }
 .SearchResultContainer{
     margin-top: 10px;
@@ -21,4 +28,42 @@
     display: grid;
     grid-template-columns: repeat(5,1fr);
     gap: 10px;
+}
+
+
+@media screen and (max-width: 1080px) {
+    .SearchResultContainer{
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .SearchResultContainer{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .SearchInputFilterContainer{
+        display: block;
+        text-align: center;
+    }
+    .SearchInputContainer{
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+    }
+    .SortFilterContainer{
+        width: 100%;
+        justify-content: center;
+    }
+    .SearchResultContainer{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .SearchResultContainer{
+        grid-template-columns: repeat(1,1fr);
+    }
 }

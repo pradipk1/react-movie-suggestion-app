@@ -1,0 +1,28 @@
+.MovieDetailsContainer{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.MovieDetailsContainer>div{
+    width: 60%;
+    background: rgb(0,12,12);
+    padding: 10px;
+    color: rgba(255,255,255,.5);
+}
+.PosterDiv>img{
+    width: 100%;
+    height: 300px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .MovieDetailsContainer>div{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .MovieDetailsContainer>div{
+        width: 100%;
+    }
+}
