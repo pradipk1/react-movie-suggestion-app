@@ -3,6 +3,8 @@ import './App.css'
 import AllRoutes from "./Components/AllRoutes/AllRoutes";
 import Navbar from "./Components/Navbar/Navbar";
 import myContext from './Components/Context/Context';
+import Backdrop from './Components/Backdrop/Backdrop';
+import SideNav from './Components/SideNav/SideNav';
 
 
 function App() {
@@ -12,11 +14,16 @@ function App() {
   const [userStatus, setUserStatus] = useState({
     ...user
   })
+  const [isSidebarNavOpen, setIsSidebarNavOpen] = useState(false);
 
   return (
     <div className="App">
       <myContext.Provider value={{userStatus, setUserStatus}}>
-        <Navbar />
+        <Navbar setIsSidebarNavOpen={setIsSidebarNavOpen}/>
+        <SideNav isSidebarNavOpen={isSidebarNavOpen} setIsSidebarNavOpen={setIsSidebarNavOpen}/>
+        {
+          isSidebarNavOpen && <Backdrop setIsSidebarNavOpen={setIsSidebarNavOpen}/>
+        }
         <AllRoutes />
       </myContext.Provider>
       

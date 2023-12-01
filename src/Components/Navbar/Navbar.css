@@ -28,3 +28,34 @@
 .NavbarProfileDiv>button:hover {
     color: burlywood;
 }
+.NavMenubarBtn{
+    display: none;
+}
+.NavMenubarBtn>img{
+    width: 100%;
+}
+
+
+@media screen and (max-width: 768px) {
+    .navbarLink{
+        display: none;
+    }
+    .NavbarProfileDiv{
+        display: none;
+    }
+    .navbarLink{
+        display: none;
+    }
+    .NavbarContainer{
+        justify-content: end;
+        padding: 10px;
+    }
+    .NavMenubarBtn{
+        width: 30px;
+        display: flex;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+    }
+}

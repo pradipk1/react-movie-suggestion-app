@@ -1,0 +1,41 @@
+.SidebarNavContainer{
+    height: 100%;
+    width: 200px;
+    background: white;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    z-index: 200;
+    transform: translateX(150%);
+    transition: transform 0.3s ease-in-out;
+}
+.SidebarNavContainer.open {
+    transform: translateX(0);
+}
+.SidebarNavCloseBtn{
+    position: absolute;
+    left: 5px;
+    top: 4px;
+    width: 50px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.SidebarNavCloseBtn img {
+    width: 100%;
+}
+.SideNavLinkContainer{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.SideNavLink{
+    text-decoration: none;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.SideNavLink:hover{
+    color: burlywood;
+}

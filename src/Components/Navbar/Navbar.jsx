@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import './Navbar.css'
 import myContext from '../Context/Context';
+import menubaricon from '../../Images/menubaricon.png'
 
-function Navbar() {
+function Navbar(props) {
 
   const {userStatus, setUserStatus} = useContext(myContext);
   
@@ -13,6 +14,10 @@ function Navbar() {
       name:'',
       isLoggedIn:false
     })
+  }
+
+  const handleSidebarNavOpen = () => {
+    props.setIsSidebarNavOpen(true);
   }
 
   return (
@@ -26,6 +31,10 @@ function Navbar() {
           <Link className='navbarLink' to='/login'>Login</Link>
         }
         <Link className='navbarLink' to='/favorites'>Favorites</Link>
+
+        <button className='NavMenubarBtn' onClick={handleSidebarNavOpen}>
+          <img src={menubaricon} alt="menubaricon" />
+        </button>
     </div>
   )
 }
