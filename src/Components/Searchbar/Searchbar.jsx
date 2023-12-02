@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Searchbar.css'
 import Movie from '../Movie/Movie';
+import myContext from '../Context/Context';
 
 function Searchbar() {
+
   const [searchResult, setSearchResult] = useState([]);
   const [error, setError] = useState(false);
   const [sort, setSort] = useState('');
   const [filterYear, setFilterYear] = useState('');
 
-  const handleChange =(e) => {
-    fetch(`https://www.omdbapi.com/?s=${e.target.value}&type=movie&apikey=ecb448ff`)
-    .then(res => res.json())
-    .then((data) => {
-      if(data.Response==='True') {
-        localStorage.setItem('searchResults', JSON.stringify(data.Search));
-        handleSort(sort, data.Search);
-        
-      } else {
-        setError(true);
-        setSearchResult([]);
-        localStorage.setItem('searchResults', JSON.stringify([]));
-      }
-    });
-  }
+  const {page, setPage, totalPage, setTotalPage, latestSearch, setLatestSearch} = useContext(myContext);
 
   const handleSort = (initialValue='', arr=[]) => {
     let results = arr;
@@ -86,16 +74,36 @@ function Searchbar() {
   }
 
   useEffect(() => {
-    let results = JSON.parse(localStorage.getItem('searchResults')) || [];
-    setSearchResult(results);
-  },[])
+    if(latestSearch!==''){
+      fetch(`https://www.omdbapi.com/?s=${latestSearch}&page=${page}&type=movie&apikey=ecb448ff`)
+      .then(res => res.json())
+      .then((data) => {
+        if(data.Response==='True') {
+          let totalPage = Math.ceil(data.totalResults/10);
+          setTotalPage(totalPage);
+          localStorage.setItem('searchResults', JSON.stringify(data.Search));
+          handleSort(sort, data.Search);
+          
+        } else {
+          setError(true);
+          setSearchResult([]);
+          setPage(1);
+          setTotalPage(0);
+          localStorage.setItem('searchResults', JSON.stringify([]));
+        }
+      });
+    }
+    
+  },[latestSearch, page]);
 
   return (
     <div className='SearchbarContainer'>
 
       <div className='SearchInputFilterContainer'>
         <div className='SearchInputContainer'>
-          <input type="text" placeholder='Enter Something!' onChange={handleChange}/>
+          <input type="text" placeholder='Enter Something!' value={latestSearch}
+            onChange={(e) => setLatestSearch(e.target.value)} 
+          />
         </div>
 
         <div className='SortFilterContainer'>
@@ -132,6 +140,15 @@ function Searchbar() {
             ))
           }
         </div> 
+      }
+      {
+        searchResult.length!==0 && (
+          <div className='PaginationContainer'>
+            <button className='PaginationPrevBtn' onClick={() => setPage(page-1)} disabled={page===1}>PREV</button>
+            <span style={{fontWeight:'500'}}>{page} of {totalPage}</span>
+            <button className='PaginationNextBtn' onClick={() => setPage(page+1)} disabled={page===totalPage}>NEXT</button>
+          </div>
+        )
       }
     </div>
   )

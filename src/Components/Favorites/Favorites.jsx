@@ -25,14 +25,14 @@ function Favorites() {
         <div className='FavoritesContainer'>
           {
             favorites.map((ele,ind) => (
-              <div className='FavoritesCardContainer'>
+              <div className='FavoritesCardContainer' key={'favorites'+ind}>
                 <Link to={`/moviedetails/${ele.imdbID}`} className='FavoritesPosterLink'>
                     <img src={ele.Poster} alt="" />
                 </Link>
                 <div className='FavoritesDetailsDiv'>
                   <p className='FavoritesTitle'>{ele.Title}</p>
-                  <h4>{ele.Year}</h4>
-                  <button style={{cursor:'pointer'}} className='RemoveFromFavoritesBtn' onClick={() => removeFromFavorite(ind)}>Remove from Favorites</button>
+                  <span>{ele.Year}</span>
+                  <button style={{cursor:'pointer'}} className='RemoveFromFavoritesBtn' onClick={() => removeFromFavorite(ind)}>Remove</button>
                 </div>
               </div>
             ))

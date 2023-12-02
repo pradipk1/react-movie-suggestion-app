@@ -34,7 +34,7 @@ function SideNav(props) {
             <Link className='SideNavLink' to='/' onClick={handleSideNavClose}>Search Movie</Link>
             {
                 userStatus.isLoggedIn ? <div className='SideNavProfileDiv'>
-                    <span>{userStatus.name}</span>
+                    <span style={{color:'green', marginBottom:'5px'}}>{userStatus.name}</span>
                     <button onClick={handleLogout}>Logout</button>
                 </div> : 
                 <Link className='SideNavLink' to='/login' onClick={handleSideNavClose}>Login</Link>

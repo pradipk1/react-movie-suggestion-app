@@ -40,7 +40,7 @@ function MovieDetails() {
             <p><b>Country: </b>{movie.Country}</p>
             <p><b>Plot: </b>{movie.Plot}</p>
             <p><b>imdbRating: </b>{movie.imdbRating}</p>
-            <button style={{cursor:'pointer', marginTop:'10px'}} onClick={handleFavorites}>Add to Favorites</button>
+            <button className='MovieDetailsBtn' onClick={handleFavorites}>Add to Favorites</button>
         </div>
     </div>
   )

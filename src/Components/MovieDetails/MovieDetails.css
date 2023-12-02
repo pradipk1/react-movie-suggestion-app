@@ -13,6 +13,16 @@
     width: 100%;
     height: 300px;
 }
+.MovieDetailsBtn{
+    margin-top: 10px;
+    padding: 5px;
+    background-color: rgb(211, 162, 98);
+    border: 1px solid black;
+    cursor: pointer;
+}
+.MovieDetailsBtn:hover{
+    background-color: rgb(139, 98, 44);
+}
 
 
 @media screen and (max-width: 768px) {

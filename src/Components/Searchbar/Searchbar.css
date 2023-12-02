@@ -29,6 +29,22 @@
     grid-template-columns: repeat(5,1fr);
     gap: 10px;
 }
+.PaginationContainer{
+    text-align: center;
+    margin: 20px;
+}
+.PaginationContainer>button{
+    padding: 5px;
+    background-color: rgb(207, 130, 29);
+    border: 1px solid gray;
+    cursor: pointer;
+}
+.PaginationPrevBtn{
+    margin-right: 20px;
+}
+.PaginationNextBtn{
+    margin-left: 20px;
+}
 
 
 @media screen and (max-width: 1080px) {
@@ -53,9 +69,13 @@
         display: flex;
         justify-content: center;
     }
+    .SearchInputContainer>input{
+        margin-right: 0;
+    }
     .SortFilterContainer{
         width: 100%;
         justify-content: center;
+        gap: 10px;
     }
     .SearchResultContainer{
         grid-template-columns: repeat(2,1fr);

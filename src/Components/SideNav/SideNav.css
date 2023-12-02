@@ -23,7 +23,7 @@
     border: none;
     cursor: pointer;
 }
-.SidebarNavCloseBtn img {
+.SidebarNavCloseBtn>img {
     width: 100%;
 }
 .SideNavLinkContainer{
@@ -38,4 +38,21 @@
 }
 .SideNavLink:hover{
     color: burlywood;
+}
+.SideNavProfileDiv{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.SideNavProfileDiv>button{
+    width: 40%;
+    padding: 2px;
+    background: transparent;
+    cursor: pointer;
+    background-color: rgb(231, 225, 141);
+    border: 1px solid black;
+    margin-left: 10px;
+}
+.SideNavProfileDiv>button:hover{
+    background-color: rgb(214, 204, 58);
 }
